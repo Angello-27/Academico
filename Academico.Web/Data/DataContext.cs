@@ -1,8 +1,8 @@
-﻿namespace Academico.Web.Data
-{
-    using Academico.Web.Data.Entities;
-    using Microsoft.EntityFrameworkCore;
+﻿using Academico.Web.Data.Entities;
+using Microsoft.EntityFrameworkCore;
 
+namespace Academico.Web.Data
+{    
     public class DataContext : DbContext
     {
         public DbSet<Student> Students { get; set; }

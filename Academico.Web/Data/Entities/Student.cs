@@ -1,8 +1,8 @@
-﻿namespace Academico.Web.Data.Entities
-{
-    using System;
-    using System.ComponentModel.DataAnnotations;    
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
+namespace Academico.Web.Data.Entities
+{    
     public class Student
     {
         public int Id { get; set; }
