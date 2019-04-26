@@ -24,6 +24,8 @@ namespace Academico.Web.Data
                 this.AddStudent("Miguel", "Escobar");
                 this.AddStudent("Perla", "Saire");
                 this.AddStudent("Abigael", "Alvarez");
+                this.AddStudent("Wuendy", "Collado");
+                this.AddStudent("Alejandra", "Montero");
                 await this.context.SaveChangesAsync();
             }
         }
