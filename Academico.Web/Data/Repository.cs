@@ -5,7 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    public class Repository
+    public class Repository : IRepository
     {
         private readonly DataContext context;
 
