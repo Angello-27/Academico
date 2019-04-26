@@ -1,11 +1,9 @@
-﻿using Academico.Web.Data.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace Academico.Web.Data
+﻿namespace Academico.Web.Data
 {
+    using Entities;
+    using System.Linq;
+    using System.Threading.Tasks;
+
     public class SeedDb
     {
         private readonly DataContext context;
@@ -30,7 +28,7 @@ namespace Academico.Web.Data
             }
         }
 
-        private void AddStudent(String name, String lastName)
+        private void AddStudent(string name, string lastName)
         {
             this.context.Students.Add(new Student
             {

@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Academico.Web.Data;
-using Academico.Web.Data.Entities;
-
-namespace Academico.Web.Controllers
+﻿namespace Academico.Web.Controllers
 {
+    using Data;
+    using Data.Entities;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
+    using System.Linq;
+    using System.Threading.Tasks;
+
     public class StudentsController : Controller
     {
         private readonly DataContext _context;

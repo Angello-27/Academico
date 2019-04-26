@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace Academico.Web.Migrations
+﻿namespace Academico.Web.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class ModifyStudents : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
