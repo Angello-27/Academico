@@ -7,8 +7,12 @@
     {
         public int Id { get; set; }
         
+        [MaxLength(50, ErrorMessage = "The field {0} only can contain {1} characters length.")]
+        [Required]
         public string Name { get; set; }
 
+        [MaxLength(50, ErrorMessage = "The field {0} only can contain {1} characters length.")]
+        [Required]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
