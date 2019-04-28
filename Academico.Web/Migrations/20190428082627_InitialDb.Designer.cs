@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Academico.Web.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20190428065037_Users")]
-    partial class Users
+    [Migration("20190428082627_InitialDb")]
+    partial class InitialDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
