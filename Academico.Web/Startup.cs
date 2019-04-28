@@ -2,6 +2,7 @@
 {
     using Data;
     using Data.Entities;
+    using Data.Repository;
     using Hepers;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
@@ -44,7 +45,9 @@
 
             services.AddTransient<SeedDb>();
 
-            services.AddScoped<IRepository, Repositoy>();
+            services.AddScoped<IStudentRepository, StudentRepository>();
+
+            services.AddScoped<IMatterRepository, MatterRepository>();
 
             services.AddScoped<IUserHelper, UserHelper>();
 

@@ -1,7 +1,7 @@
 ﻿namespace Academico.Web.Controllers
 {
-    using Data;
     using Data.Entities;
+    using Data.Repository;
     using Hepers;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
@@ -9,10 +9,10 @@
 
     public class StudentsController : Controller
     {
-        private readonly IRepository repository;
+        private readonly IStudentRepository repository;
         private readonly IUserHelper userHelper;
 
-        public StudentsController(IRepository repository, IUserHelper userHelper)
+        public StudentsController(IStudentRepository repository, IUserHelper userHelper)
         {
             this.repository = repository;
             this.userHelper = userHelper;
@@ -21,18 +21,18 @@
         // GET: Students
         public IActionResult Index()
         {
-            return View(this.repository.GetStudents());
+            return View(this.repository.GetAll());
         }
 
         // GET: Students/Details/5
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var student = this.repository.GetStudent(id.Value);
+            var student = await this.repository.GetByIdAsync(id.Value);
             if (student == null)
             {
                 return NotFound();
@@ -56,22 +56,21 @@
             {
                 //TODO: Change for the logged user
                 student.User = await this.userHelper.GetUserByEmailAsync("miguel.k2705@gmail.com");
-                this.repository.AddStudent(student);
-                await this.repository.SaveAllAsync();
+                await this.repository.CreatedAsync(student);
                 return RedirectToAction(nameof(Index));
             }
             return View(student);
         }
 
         // GET: Students/Edit/5
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var student = this.repository.GetStudent(id.Value);
+            var student = await this.repository.GetByIdAsync(id.Value);
             if (student == null)
             {
                 return NotFound();
@@ -89,13 +88,12 @@
                 try
                 {
                     //TODO: Change for the logged user
-                    student.User = await this.userHelper.GetUserByEmailAsync("miguel.k2705@gmail.com");
-                    this.repository.UpdateStudent(student);
-                    await this.repository.SaveAllAsync();
+                    student.User = await this.userHelper.GetUserByEmailAsync("miguel.k2705@gmail.com");                    
+                    await this.repository.UpdateAsync(student);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!this.repository.StudentExists(student.Id))
+                    if (!await this.repository.ExistAsync(student.Id))
                     {
                         return NotFound();
                     }
@@ -110,14 +108,14 @@
         }
 
         // GET: Students/Delete/5
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var student = this.repository.GetStudent(id.Value);
+            var student = await this.repository.GetByIdAsync(id.Value);
             if (student == null)
             {
                 return NotFound();
@@ -131,9 +129,8 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var student = this.repository.GetStudent(id);
-            this.repository.RemoveStudent(student);
-            await this.repository.SaveAllAsync();
+            var student = await this.repository.GetByIdAsync(id);
+            await this.repository.DeleteAsync(student);
             return RedirectToAction(nameof(Index));
         }
 
