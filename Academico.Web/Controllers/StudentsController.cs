@@ -82,7 +82,7 @@
         // POST: Students/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Student student)
+        public async Task<IActionResult> Edit(Student student)
         {
             if (ModelState.IsValid)
             {

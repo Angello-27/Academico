@@ -5,11 +5,11 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    public class Repository : IRepository
+    public class Repositoy : IRepository
     {
         private readonly DataContext context;
 
-        public Repository(DataContext context)
+        public Repositoy(DataContext context)
         {
             this.context = context;
         }

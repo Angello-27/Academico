@@ -44,7 +44,7 @@
 
             services.AddTransient<SeedDb>();
 
-            services.AddScoped<IRepository, Repository>();
+            services.AddScoped<IRepository, Repositoy>();
 
             services.AddScoped<IUserHelper, UserHelper>();
 
