@@ -1,6 +1,4 @@
-﻿
-
-namespace Academico.Web.Data
+﻿namespace Academico.Web.Data
 {
     using System.Linq;
     using System.Threading.Tasks;

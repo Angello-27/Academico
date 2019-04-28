@@ -8,6 +8,8 @@
     {
         public DbSet<Student> Students { get; set; }
 
+        public DbSet<Matter> Matters { get; set; }
+
         public DataContext(DbContextOptions<DataContext> options) : base(options)
         {
         }
