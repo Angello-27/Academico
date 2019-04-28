@@ -2,6 +2,7 @@
 {
     using Data;
     using Data.Entities;
+    using Hepers;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using System.Threading.Tasks;
@@ -9,10 +10,12 @@
     public class StudentsController : Controller
     {
         private readonly IRepository repository;
+        private readonly IUserHelper userHelper;
 
-        public StudentsController(IRepository repository)
+        public StudentsController(IRepository repository, IUserHelper userHelper)
         {
             this.repository = repository;
+            this.userHelper = userHelper;
         }
 
         // GET: Students
@@ -51,6 +54,8 @@
         {
             if (ModelState.IsValid)
             {
+                //TODO: Change for the logged user
+                student.User = await this.userHelper.GetUserByEmailAsync("miguel.k2705@gmail.com");
                 this.repository.AddStudent(student);
                 await this.repository.SaveAllAsync();
                 return RedirectToAction(nameof(Index));
@@ -83,6 +88,8 @@
             {
                 try
                 {
+                    //TODO: Change for the logged user
+                    student.User = await this.userHelper.GetUserByEmailAsync("miguel.k2705@gmail.com");
                     this.repository.UpdateStudent(student);
                     await this.repository.SaveAllAsync();
                 }

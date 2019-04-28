@@ -1,6 +1,7 @@
 ﻿namespace Academico.Web.Data
 {
     using Entities;
+    using Hepers;
     using Microsoft.AspNetCore.Identity;
     using System;
     using System.Linq;
@@ -9,19 +10,19 @@
     public class SeedDb
     {
         private readonly DataContext context;
-        private readonly UserManager<User> userManager;
+        private readonly IUserHelper userHelper;
 
-        public SeedDb(DataContext context, UserManager<User> userManager)
+        public SeedDb(DataContext context, IUserHelper userHelper)
         {
             this.context = context;
-            this.userManager = userManager;
+            this.userHelper = userHelper;
         }
 
         public async Task SeedAsync()
         {
             await this.context.Database.EnsureCreatedAsync();
 
-            var user = await this.userManager.FindByEmailAsync("miguel.k2705@gmail.com");
+            var user = await this.userHelper.GetUserByEmailAsync("miguel.k2705@gmail.com");
             if (user == null)
             {
                 user = new User
@@ -34,7 +35,7 @@
                 };
             }
 
-            var result = await this.userManager.CreateAsync(user, "123456");
+            var result = await this.userHelper.AddUserAsync(user, "123456");
             if (result != IdentityResult.Success)
             {
                 throw new InvalidOperationException("Could not create the user in seeder");

@@ -1,7 +1,8 @@
 ﻿namespace Academico.Web
 {
-    using Academico.Web.Data.Entities;
     using Data;
+    using Data.Entities;
+    using Hepers;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -44,6 +45,8 @@
             services.AddTransient<SeedDb>();
 
             services.AddScoped<IRepository, Repository>();
+
+            services.AddScoped<IUserHelper, UserHelper>();
 
             services.Configure<CookiePolicyOptions>(options =>
             {
