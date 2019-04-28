@@ -21,5 +21,7 @@
         [Display(Name = "Is Available?")]
         public bool IsAvailable { get; set; }
 
+        public User User { get; set; }
+
     }
 }
