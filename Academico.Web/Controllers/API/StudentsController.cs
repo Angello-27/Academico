@@ -16,7 +16,7 @@
         [HttpGet]
         public IActionResult GetStudents()
         {
-            return Ok(this.stundentRepository.GetAll());
+            return Ok(this.stundentRepository.GetAllWithUsers());
         }
     }
 }

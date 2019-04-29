@@ -7,6 +7,7 @@
     using Microsoft.EntityFrameworkCore;
     using Models;
     using System.IO;
+    using System.Linq;
     using System.Threading.Tasks;
 
     public class StudentsController : Controller
@@ -23,7 +24,7 @@
         // GET: Students
         public IActionResult Index()
         {
-            return View(this.repository.GetAll());
+            return View(this.repository.GetAll().OrderBy(s => s.LastName));
         }
 
         // GET: Students/Details/5
