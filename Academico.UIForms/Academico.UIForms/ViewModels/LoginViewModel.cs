@@ -13,6 +13,12 @@
 
         public ICommand LoginCommand => new RelayCommand(Login);
 
+        public LoginViewModel()
+        {
+            this.Email = "admin";
+            this.Password = "12345";
+        }
+
         private async void Login()
         {
             if (string.IsNullOrEmpty(this.Email))
