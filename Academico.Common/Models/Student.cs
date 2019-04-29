@@ -24,6 +24,11 @@
 
         [JsonProperty("imageFullPath")]
         public object ImageFullPath { get; set; }
+
+        public override string ToString()
+        {
+            return $"{this.Name} {this.LastName}";
+        }
     }
 
 }

@@ -1,5 +1,6 @@
 ﻿namespace Academico.UIForms.ViewModels
 {
+    using Academico.UIForms.Views;
     using GalaSoft.MvvmLight.Command;
     using System;
     using System.Windows.Input;
@@ -47,11 +48,8 @@
                     "Accept");
                 return;
             }
-
-            await Application.Current.MainPage.DisplayAlert(
-                    "Ok",
-                    "Fuck yeah!!",
-                    "Accept");
+            MainViewModel.GetInstance().Students = new StudentsViewModel();
+            await Application.Current.MainPage.Navigation.PushAsync(new StudentsPage());
             return;
         }
     }

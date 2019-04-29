@@ -1,5 +1,6 @@
 ﻿namespace Academico.UIForms
 {
+    using Academico.UIForms.ViewModels;
     using Academico.UIForms.Views;
     using Xamarin.Forms;
 
@@ -8,7 +9,7 @@
         public App()
         {
             InitializeComponent();
-
+            MainViewModel.GetInstance().Login = new LoginViewModel();
             MainPage = new NavigationPage(new LoginPage());
         }
 
