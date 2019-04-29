@@ -5,6 +5,8 @@
     using Hepers;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
+    using Models;
+    using System.IO;
     using System.Threading.Tasks;
 
     public class StudentsController : Controller
@@ -50,16 +52,30 @@
         // POST: Students/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Student student)
+        public async Task<IActionResult> Create(StudentViewModel view)
         {
             if (ModelState.IsValid)
             {
+                var path = string.Empty;
+                if (view.ImageFile != null && view.ImageFile.Length > 0)
+                {
+                    path = Path.Combine(
+                        Directory.GetCurrentDirectory(),
+                        "wwwroot\\images\\Students",
+                        view.ImageFile.FileName);
+                    using (var stream = new FileStream(path, FileMode.Create))
+                    {
+                        await view.ImageFile.CopyToAsync(stream);
+                    }
+                    path = $"~/images/Students/{view.ImageFile.FileName}";
+                }
+                var student = this.ToStudent(view, path);
                 //TODO: Change for the logged user
                 student.User = await this.userHelper.GetUserByEmailAsync("miguel.k2705@gmail.com");
                 await this.repository.CreatedAsync(student);
                 return RedirectToAction(nameof(Index));
             }
-            return View(student);
+            return View(view);
         }
 
         // GET: Students/Edit/5
@@ -75,25 +91,40 @@
             {
                 return NotFound();
             }
-            return View(student);
+            var view = this.ToStudentViewModel(student);
+            return View(view);
         }
 
         // POST: Students/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Student student)
+        public async Task<IActionResult> Edit(StudentViewModel view)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
+                    var path = view.ImageUrl;
+                    if (view.ImageFile != null && view.ImageFile.Length > 0)
+                    {
+                        path = Path.Combine(
+                        Directory.GetCurrentDirectory(),
+                        "wwwroot\\images\\Students",
+                        view.ImageFile.FileName);
+                        using (var stream = new FileStream(path, FileMode.Create))
+                        {
+                            await view.ImageFile.CopyToAsync(stream);
+                        }
+                        path = $"~/images/Students/{view.ImageFile.FileName}";
+                    }
+                    var student = this.ToStudent(view, path);
                     //TODO: Change for the logged user
-                    student.User = await this.userHelper.GetUserByEmailAsync("miguel.k2705@gmail.com");                    
+                    student.User = await this.userHelper.GetUserByEmailAsync("miguel.k2705@gmail.com");
                     await this.repository.UpdateAsync(student);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!await this.repository.ExistAsync(student.Id))
+                    if (!await this.repository.ExistAsync(view.Id))
                     {
                         return NotFound();
                     }
@@ -104,7 +135,7 @@
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(student);
+            return View(view);
         }
 
         // GET: Students/Delete/5
@@ -133,6 +164,33 @@
             await this.repository.DeleteAsync(student);
             return RedirectToAction(nameof(Index));
         }
+
+        private Student ToStudent(StudentViewModel view, string path)
+        {
+            return new Student
+            {
+                Id = view.Id,
+                Name = view.Name,
+                LastName = view.LastName,
+                ImageUrl = path,
+                IsAvailable = view.IsAvailable,
+                User = view.User
+            };
+        }
+
+        private StudentViewModel ToStudentViewModel(Student student)
+        {
+            return new StudentViewModel
+            {
+                Id = student.Id,
+                Name = student.Name,
+                LastName = student.LastName,
+                ImageUrl = student.ImageUrl,
+                IsAvailable = student.IsAvailable,
+                User = student.User
+            };
+        }
+
 
     }
 }
