@@ -9,12 +9,19 @@
     public class StudentsViewModel : BaseViewModel
     {
         private readonly ApiService apiService;
-        private ObservableCollection<Student> students;        
+        private ObservableCollection<Student> students;
+        private bool isRefreshing;
 
         public ObservableCollection<Student> Students
         {
             get => this.students;
             set => this.SetValue(ref this.students, value);
+        }
+
+        public bool IsRefreshing
+        {
+            get => this.isRefreshing;
+            set => this.SetValue(ref this.isRefreshing, value);
         }
 
         public StudentsViewModel()
@@ -25,10 +32,13 @@
 
         private async void LoadStudents()
         {
+            this.IsRefreshing = true;
             var response = await this.apiService.GetListAsync<Student>(
                 "https://academicotopicos.azurewebsites.net",
                 "/api",
                 "/Students");
+
+            this.IsRefreshing = false;
             if (!response.IsSuccess)
             {
                 await Application.Current.MainPage.DisplayAlert(

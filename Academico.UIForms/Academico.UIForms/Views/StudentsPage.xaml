@@ -9,6 +9,7 @@
             BindingContext="{Binding Students}"
             Padding="8">
             <ListView
+                IsRefreshing="{Binding IsRefreshing}"
                 HasUnevenRows="True"
                 ItemsSource="{Binding Students}">
                 <ListView.ItemTemplate>
