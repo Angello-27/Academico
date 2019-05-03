@@ -76,9 +76,8 @@
                     }
                     path = $"~/images/Students/{file}";
                 }
-                var student = this.ToStudent(view, path);
-                //TODO: Change for the logged user
-                student.User = await this.userHelper.GetUserByEmailAsync("miguel.k2705@gmail.com");
+                var student = this.ToStudent(view, path);                
+                student.User = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
                 await this.repository.CreatedAsync(student);
                 return RedirectToAction(nameof(Index));
             }
@@ -127,9 +126,8 @@
                         }
                         path = $"~/images/Students/{file}";
                     }
-                    var student = this.ToStudent(view, path);
-                    //TODO: Change for the logged user
-                    student.User = await this.userHelper.GetUserByEmailAsync("miguel.k2705@gmail.com");
+                    var student = this.ToStudent(view, path);                    
+                    student.User = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
                     await this.repository.UpdateAsync(student);
                 }
                 catch (DbUpdateConcurrencyException)
