@@ -1,7 +1,7 @@
 ﻿namespace Academico.Web.Data
 {
     using Entities;
-    using Hepers;
+    using Helpers;
     using Microsoft.AspNetCore.Identity;
     using System;
     using System.Linq;

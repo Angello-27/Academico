@@ -1,8 +1,8 @@
-﻿namespace Academico.Web.Hepers
+﻿namespace Academico.Web.Helpers
 {
-    using Models;
     using Data.Entities;
     using Microsoft.AspNetCore.Identity;
+    using Models;
     using System.Threading.Tasks;
 
     public class UserHelper : IUserHelper
@@ -45,7 +45,7 @@
                 {
                     Name = roleName
                 });
-            }  
+            }
         }
 
         public async Task<User> GetUserByEmailAsync(string email)
@@ -84,6 +84,11 @@
                 password,
                 false
                 );
+        }
+
+        Task<User> IUserHelper.GetUserByEmailAsync(string email)
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

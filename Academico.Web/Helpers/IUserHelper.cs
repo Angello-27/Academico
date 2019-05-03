@@ -1,4 +1,4 @@
-﻿namespace Academico.Web.Hepers
+﻿namespace Academico.Web.Helpers
 {
     using Data.Entities;
     using Microsoft.AspNetCore.Identity;
@@ -26,5 +26,6 @@
         Task AddUserToRoleAsync(User user, string roleName);
 
         Task<bool> IsUserInRoleAsync(User user, string roleName);
+
     }
 }

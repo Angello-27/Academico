@@ -2,7 +2,7 @@
 {
     using Data.Entities;
     using Data.Repository;
-    using Hepers;
+    using Helpers;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
@@ -11,7 +11,7 @@
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
-    
+
     public class StudentsController : Controller
     {
         private readonly IStudentRepository repository;
@@ -22,7 +22,7 @@
             this.repository = repository;
             this.userHelper = userHelper;
         }
-        
+
         public IActionResult Index()
         {
             return View(this.repository.GetAll().OrderBy(s => s.LastName));
@@ -72,7 +72,7 @@
                     }
                     path = $"~/images/Students/{file}";
                 }
-                var student = this.ToStudent(view, path);                
+                var student = this.ToStudent(view, path);
                 student.User = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
                 await this.repository.CreatedAsync(student);
                 return RedirectToAction(nameof(Index));
@@ -121,7 +121,7 @@
                         }
                         path = $"~/images/Students/{file}";
                     }
-                    var student = this.ToStudent(view, path);                
+                    var student = this.ToStudent(view, path);
                     student.User = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
                     await this.repository.UpdateAsync(student);
                 }

@@ -1,9 +1,9 @@
 ﻿namespace Academico.Web
 {
+    using Helpers;
     using Data;
     using Data.Entities;
     using Data.Repository;
-    using Hepers;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
