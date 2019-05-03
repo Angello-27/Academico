@@ -126,7 +126,7 @@
                         }
                         path = $"~/images/Students/{file}";
                     }
-                    var student = this.ToStudent(view, path);                    
+                    var student = this.ToStudent(view, path);                
                     student.User = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
                     await this.repository.UpdateAsync(student);
                 }
