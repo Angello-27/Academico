@@ -3,6 +3,7 @@
     using Data.Entities;
     using Data.Repository;
     using Hepers;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
     using Models;
@@ -11,6 +12,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    [Authorize]
     public class StudentsController : Controller
     {
         private readonly IStudentRepository repository;
