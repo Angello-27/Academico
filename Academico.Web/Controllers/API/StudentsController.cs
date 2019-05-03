@@ -1,9 +1,12 @@
 ﻿namespace Academico.Web.Controllers.API
 {
-    using Academico.Web.Data.Repository;
+    using Data.Repository;
+    using Microsoft.AspNetCore.Authentication.JwtBearer;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     [Route("api/[Controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class StudentsController : Controller
     {
         private readonly IStudentRepository stundentRepository;
