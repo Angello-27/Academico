@@ -1,9 +1,9 @@
 ﻿namespace Academico.Web
 {
+    using Helpers;
     using Data;
     using Data.Entities;
     using Data.Repository;
-    using Hepers;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -74,6 +74,11 @@
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = "/Account/NotAuthorized";
+                options.AccessDeniedPath = "/Account/NotAuthorized";
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -90,6 +95,8 @@
                 app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
+
+            app.UseStatusCodePagesWithRedirects("/error/{0}");
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

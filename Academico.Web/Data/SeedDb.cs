@@ -1,7 +1,7 @@
 ﻿namespace Academico.Web.Data
 {
     using Entities;
-    using Hepers;
+    using Helpers;
     using Microsoft.AspNetCore.Identity;
     using System;
     using System.Linq;
@@ -22,6 +22,10 @@
         {
             await this.context.Database.EnsureCreatedAsync();
 
+            await this.userHelper.CheckRoleAsync("Admin");
+            await this.userHelper.CheckRoleAsync("Customer");
+
+            //Add User
             var user = await this.userHelper.GetUserByEmailAsync("miguel.k2705@gmail.com");
             if (user == null)
             {
@@ -33,14 +37,23 @@
                     UserName = "miguel.k2705@gmail.com",
                     PhoneNumber = "75505343"
                 };
+
+                var result = await this.userHelper.AddUserAsync(user, "123456");
+                if (result != IdentityResult.Success)
+                {
+                    throw new InvalidOperationException("Could not create the user in seeder");
+                }
+
+                await this.userHelper.AddUserToRoleAsync(user, "Admin");
             }
 
-            var result = await this.userHelper.AddUserAsync(user, "123456");
-            if (result != IdentityResult.Success)
+            var isInRole = await this.userHelper.IsUserInRoleAsync(user, "Admin");
+            if (!isInRole)
             {
-                throw new InvalidOperationException("Could not create the user in seeder");
+                await this.userHelper.AddUserToRoleAsync(user, "Admin");
             }
 
+            //Add Students
             if (!this.context.Students.Any())
             {
                 this.AddStudent("Miguel", "Escobar", user);

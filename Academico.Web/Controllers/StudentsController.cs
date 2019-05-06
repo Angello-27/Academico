@@ -2,7 +2,7 @@
 {
     using Data.Entities;
     using Data.Repository;
-    using Hepers;
+    using Helpers;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.EntityFrameworkCore;
@@ -12,7 +12,6 @@
     using System.Linq;
     using System.Threading.Tasks;
 
-    [Authorize]
     public class StudentsController : Controller
     {
         private readonly IStudentRepository repository;
@@ -24,36 +23,33 @@
             this.userHelper = userHelper;
         }
 
-        // GET: Students
         public IActionResult Index()
         {
             return View(this.repository.GetAll().OrderBy(s => s.LastName));
         }
 
-        // GET: Students/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
-                return NotFound();
+                return new NotFoundViewResult("StudentNotFound");
             }
 
             var student = await this.repository.GetByIdAsync(id.Value);
             if (student == null)
             {
-                return NotFound();
+                return new NotFoundViewResult("StudentNotFound");
             }
 
             return View(student);
         }
 
-        // GET: Students/Create
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Students/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(StudentViewModel view)
@@ -76,7 +72,7 @@
                     }
                     path = $"~/images/Students/{file}";
                 }
-                var student = this.ToStudent(view, path);                
+                var student = this.ToStudent(view, path);
                 student.User = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
                 await this.repository.CreatedAsync(student);
                 return RedirectToAction(nameof(Index));
@@ -84,7 +80,7 @@
             return View(view);
         }
 
-        // GET: Students/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -101,7 +97,6 @@
             return View(view);
         }
 
-        // POST: Students/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(StudentViewModel view)
@@ -126,7 +121,7 @@
                         }
                         path = $"~/images/Students/{file}";
                     }
-                    var student = this.ToStudent(view, path);                
+                    var student = this.ToStudent(view, path);
                     student.User = await this.userHelper.GetUserByEmailAsync(this.User.Identity.Name);
                     await this.repository.UpdateAsync(student);
                 }
@@ -146,7 +141,7 @@
             return View(view);
         }
 
-        // GET: Students/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -163,7 +158,6 @@
             return View(student);
         }
 
-        // POST: Students/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -199,6 +193,10 @@
             };
         }
 
+        public IActionResult StudentNotFound()
+        {
+            return this.View();
+        }
 
     }
 }

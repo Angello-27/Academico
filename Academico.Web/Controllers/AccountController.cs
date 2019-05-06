@@ -1,7 +1,7 @@
 ﻿namespace Academico.Web.Controllers
 {
     using Data.Entities;
-    using Hepers;
+    using Helpers;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.Extensions.Configuration;
@@ -224,6 +224,11 @@
             }
 
             return this.BadRequest();
+        }
+
+        public IActionResult NotAuthorized()
+        {
+            return this.View();
         }
 
     }
