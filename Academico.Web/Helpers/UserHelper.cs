@@ -85,10 +85,6 @@
                 false
                 );
         }
-
-        Task<User> IUserHelper.GetUserByEmailAsync(string email)
-        {
-            throw new System.NotImplementedException();
-        }
+   
     }
 }
