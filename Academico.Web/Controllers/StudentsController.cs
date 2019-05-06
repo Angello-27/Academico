@@ -32,13 +32,13 @@
         {
             if (id == null)
             {
-                return NotFound();
+                return new NotFoundViewResult("StudentNotFound");
             }
 
             var student = await this.repository.GetByIdAsync(id.Value);
             if (student == null)
             {
-                return NotFound();
+                return new NotFoundViewResult("StudentNotFound");
             }
 
             return View(student);
@@ -193,6 +193,10 @@
             };
         }
 
+        public IActionResult StudentNotFound()
+        {
+            return this.View();
+        }
 
     }
 }
