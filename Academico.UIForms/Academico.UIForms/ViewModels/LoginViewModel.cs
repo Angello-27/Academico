@@ -90,7 +90,7 @@
 
             var token = (TokenResponse)response.Result;
             var mainViewModel = MainViewModel.GetInstance();
-            mainViewModel.token = token;
+            mainViewModel.Token = token;
             mainViewModel.Students = new StudentsViewModel();
             await Application.Current.MainPage.Navigation.PushAsync(new StudentsPage());            
         }

@@ -33,10 +33,13 @@
         private async void LoadStudents()
         {
             this.IsRefreshing = true;
+            var url = Application.Current.Resources["UrlAPI"].ToString();
             var response = await this.apiService.GetListAsync<Student>(
-                "https://academicotopicos.azurewebsites.net",
+                url,
                 "/api",
-                "/Students");
+                "/Students",
+                "bearer", 
+                MainViewModel.GetInstance().Token.Token);
 
             this.IsRefreshing = false;
             if (!response.IsSuccess)
