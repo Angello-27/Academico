@@ -1,8 +1,12 @@
 ﻿namespace Academico.UIForms.ViewModels
 {
+    using Common.Models;
+
     public class MainViewModel
     {
         private static MainViewModel instance;
+
+        public TokenResponse token { get; set; }
 
         public LoginViewModel Login { get; set; }
 

@@ -21,8 +21,11 @@
                     IsPassword="True"
                     Placeholder="Enter your Password..."
                     Text="{Binding Password}" />
+                <ActivityIndicator 
+                    IsRunning="{Binding IsRunning}" />
                 <Button
                     Command="{Binding LoginCommand}"
+                    IsEnabled="{Binding IsEnabled}"
                     Text="Login" />
             </StackLayout>
         </ScrollView>

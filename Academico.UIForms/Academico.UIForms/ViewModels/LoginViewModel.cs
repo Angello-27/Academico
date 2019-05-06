@@ -1,23 +1,43 @@
 ﻿namespace Academico.UIForms.ViewModels
 {
-    using Academico.UIForms.Views;
+    using Common.Models;
+    using Common.Services;
     using GalaSoft.MvvmLight.Command;
-    using System;
     using System.Windows.Input;
+    using Views;
     using Xamarin.Forms;
 
-    public class LoginViewModel
+    public class LoginViewModel : BaseViewModel
     {
+        private readonly ApiService apiService;
+
+        private bool isRunning;
+        private bool isEnabled;
+
         public string Email { get; set; }
 
         public string Password { get; set; }
 
         public ICommand LoginCommand => new RelayCommand(Login);
 
+        public bool IsRunning
+        {
+            get => this.isRunning;
+            set => this.SetValue(ref this.isRunning, value);
+        }
+
+        public bool IsEnabled
+        {
+            get => this.isEnabled;
+            set => this.SetValue(ref this.isEnabled, value);
+        }
+
         public LoginViewModel()
         {
-            this.Email = "admin";
-            this.Password = "12345";
+            this.apiService = new ApiService();
+            this.Email = "miguel.k2705@gmail.com";
+            this.Password = "123456";
+            this.isEnabled = true;
         }
 
         private async void Login()
@@ -40,17 +60,39 @@
                 return;
             }
 
-            if(!this.Email.Equals("admin") || !this.Password.Equals("12345"))
+            this.IsRunning = true;
+            this.IsEnabled = false;
+
+            var request = new TokenRequest
+            {
+                Password = this.Password,
+                Username = this.Email
+            };
+
+            var url = Application.Current.Resources["UrlAPI"].ToString();
+            var response = await this.apiService.GetTokenAsync(
+                url,
+                "/Account",
+                "/CreateToken",
+                request);
+
+            this.IsRunning = false;
+            this.IsEnabled = true;
+
+            if (!response.IsSuccess)
             {
                 await Application.Current.MainPage.DisplayAlert(
                     "Error",
-                    "User o Password wrog.",
+                    "Email o Password incorrect.",
                     "Accept");
                 return;
             }
-            MainViewModel.GetInstance().Students = new StudentsViewModel();
-            await Application.Current.MainPage.Navigation.PushAsync(new StudentsPage());
-            return;
+
+            var token = (TokenResponse)response.Result;
+            var mainViewModel = MainViewModel.GetInstance();
+            mainViewModel.token = token;
+            mainViewModel.Students = new StudentsViewModel();
+            await Application.Current.MainPage.Navigation.PushAsync(new StudentsPage());            
         }
     }
 }
