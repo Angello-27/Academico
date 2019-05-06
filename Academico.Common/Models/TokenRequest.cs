@@ -1,6 +1,6 @@
 ﻿namespace Academico.Common.Models
 {
-    internal class TokenRequest
+    public class TokenRequest
     {
         public string Username { get; set; }
 
