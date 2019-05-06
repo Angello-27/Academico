@@ -121,7 +121,7 @@
                 model.LastName = user.LastName;
             }
 
-            return this.View(model);
+            return this.View();
         }
 
         [HttpPost]

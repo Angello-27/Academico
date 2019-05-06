@@ -1,9 +1,9 @@
 ﻿namespace Academico.Web
 {
-    using Helpers;
     using Data;
     using Data.Entities;
     using Data.Repository;
+    using Helpers;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;
@@ -59,10 +59,9 @@
                 cfg.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddTransient<SeedDb>();
+            services.AddTransient<SeedDb>();            
 
             services.AddScoped<IStudentRepository, StudentRepository>();
-
             services.AddScoped<IMatterRepository, MatterRepository>();
 
             services.AddScoped<IUserHelper, UserHelper>();
