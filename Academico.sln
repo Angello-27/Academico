@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.28803.202
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Academico.Common", "Academico.Common\Academico.Common.csproj", "{453E4DA8-8E69-426C-9BE8-89332B951F42}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Academico.Common", "Academico.Common\Academico.Common.csproj", "{453E4DA8-8E69-426C-9BE8-89332B951F42}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{1053F88E-99D1-4575-AEAA-307B1E4CF421}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{71370BF2-16DB-4BE5-922A-C1D7E457CBDB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Academico.Web", "Academico.Web\Academico.Web.csproj", "{511CB94F-539B-43CC-8E5A-D6465264C94E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Academico.Web", "Academico.Web\Academico.Web.csproj", "{511CB94F-539B-43CC-8E5A-D6465264C94E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Forms", "Forms", "{E923CCC7-347D-4E1D-BCC0-FB0491AF2B5F}"
 EndProject
@@ -19,9 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Academico.UIForms.Android",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Academico.UIForms.iOS", "Academico.UIForms\Academico.UIForms.iOS\Academico.UIForms.iOS.csproj", "{A5B88AEC-8DB5-40A8-A4D9-C8C9F080E2C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Academico.UIForms", "Academico.UIForms\Academico.UIForms\Academico.UIForms.csproj", "{1870ADCB-849E-495E-A96F-7B8E5A48E984}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Academico.UIClassic", "Academico.UIClassic\Academico.UIClassic.csproj", "{2DB8EF70-0501-4643-90A5-516BFDFC4C40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Academico.UIForms", "Academico.UIForms\Academico.UIForms\Academico.UIForms.csproj", "{1870ADCB-849E-495E-A96F-7B8E5A48E984}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Academico.UIClassic.Android", "Academico.UIClassic.Android\Academico.UIClassic.Android.csproj", "{4D2109F0-8630-4E54-8B57-95C4BBDB57DA}"
 EndProject
@@ -101,18 +99,6 @@ Global
 		{1870ADCB-849E-495E-A96F-7B8E5A48E984}.Release|iPhone.Build.0 = Release|Any CPU
 		{1870ADCB-849E-495E-A96F-7B8E5A48E984}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{1870ADCB-849E-495E-A96F-7B8E5A48E984}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
-		{2DB8EF70-0501-4643-90A5-516BFDFC4C40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2DB8EF70-0501-4643-90A5-516BFDFC4C40}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2DB8EF70-0501-4643-90A5-516BFDFC4C40}.Debug|iPhone.ActiveCfg = Debug|Any CPU
-		{2DB8EF70-0501-4643-90A5-516BFDFC4C40}.Debug|iPhone.Build.0 = Debug|Any CPU
-		{2DB8EF70-0501-4643-90A5-516BFDFC4C40}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
-		{2DB8EF70-0501-4643-90A5-516BFDFC4C40}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
-		{2DB8EF70-0501-4643-90A5-516BFDFC4C40}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2DB8EF70-0501-4643-90A5-516BFDFC4C40}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2DB8EF70-0501-4643-90A5-516BFDFC4C40}.Release|iPhone.ActiveCfg = Release|Any CPU
-		{2DB8EF70-0501-4643-90A5-516BFDFC4C40}.Release|iPhone.Build.0 = Release|Any CPU
-		{2DB8EF70-0501-4643-90A5-516BFDFC4C40}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
-		{2DB8EF70-0501-4643-90A5-516BFDFC4C40}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 		{4D2109F0-8630-4E54-8B57-95C4BBDB57DA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4D2109F0-8630-4E54-8B57-95C4BBDB57DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D2109F0-8630-4E54-8B57-95C4BBDB57DA}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
@@ -152,7 +138,6 @@ Global
 		{84D89D20-8C68-4C31-A350-60C1FF444C7E} = {E923CCC7-347D-4E1D-BCC0-FB0491AF2B5F}
 		{A5B88AEC-8DB5-40A8-A4D9-C8C9F080E2C7} = {E923CCC7-347D-4E1D-BCC0-FB0491AF2B5F}
 		{1870ADCB-849E-495E-A96F-7B8E5A48E984} = {E923CCC7-347D-4E1D-BCC0-FB0491AF2B5F}
-		{2DB8EF70-0501-4643-90A5-516BFDFC4C40} = {1FE15329-8F1B-4AA0-9DCC-C1DC991DF466}
 		{4D2109F0-8630-4E54-8B57-95C4BBDB57DA} = {1FE15329-8F1B-4AA0-9DCC-C1DC991DF466}
 		{78722D3F-B561-4CAB-9201-E04260AF90A0} = {1FE15329-8F1B-4AA0-9DCC-C1DC991DF466}
 	EndGlobalSection
